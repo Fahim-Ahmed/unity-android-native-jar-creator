@@ -1,10 +1,12 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.filechooser.FileSystemView;
@@ -20,10 +22,23 @@ import javax.swing.plaf.*;
  */
 public class MainInterface extends JFrame {
     private JFileChooser fc;
-    private String tmpDest;
 
     public MainInterface() {
         initComponents();
+
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(new File("icon"));
+            setIconImage(image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
+
+
+        super.setIconImage(image);
     }
 
     private void btnSourceActionPerformed(ActionEvent e) {
@@ -91,7 +106,7 @@ public class MainInterface extends JFrame {
         String classpath = "libs\\classes.jar";
         String bootclasspath = "libs\\android.jar";
         String fileName = "files.dat";
-        tmpDest = "compiled";
+        String tmpDest = "compiled";
 
         File tmpDir = new File(tmpDest);
         if(!tmpDir.exists())
@@ -108,13 +123,17 @@ public class MainInterface extends JFrame {
             return;
         }
 
+        String tmp = packageName.replace("\\", "/");  //String split don't support stupid backslash -_-
+        String[] ss = tmp.split("/");
+        String jName = ss[ss.length-1];
+
         //set ingredients
         String[] options = new String[]{
                 "-bootclasspath", bootclasspath,
                 "-classpath", classpath,
                 "-source", "1.6",
                 "-target", "1.6",
-                "-d", "./",
+                "-d", new File("").getAbsolutePath(),
                 "@" + tmpDest + "\\" + fileName,
                // srcPath
         };
@@ -126,10 +145,6 @@ public class MainInterface extends JFrame {
         //jar generation start ----------------------------------------------------------------------------------------------------
         showStatus("class file generated.");
 
-        String tmp = packageName.replace("\\", "/");  //String split don't support stupid backslash -_-
-        String[] ss = tmp.split("/");
-        String jName = ss[ss.length-1];
-
         System.out.println("-----> " +jName);
 
         showStatus("creating jar...");
@@ -139,12 +154,12 @@ public class MainInterface extends JFrame {
 
         } catch (IOException e) {
             e.printStackTrace();
-            showWarning("epic fail: IO error. please die.");
+            showWarning("epic fail: IO error. please die. probably classpath files are missing. sigh.");
             return;
         }
 
         showStatus("temp file delete success: " + deleteDirectory(new File(ss[0])));
-        showStatus("jar complete. you can break it now and pat yourself.");
+        showStatus("jar created. you can now break it and pat yourself.");
 
         System.out.println("-----> " + srcPath);
     }
@@ -165,7 +180,6 @@ public class MainInterface extends JFrame {
         }
         return (path.delete());
     }
-
 
     private void writeFileList(String path, String srcPath) throws IOException {
         showStatus("populating swarm...");
@@ -217,6 +231,11 @@ public class MainInterface extends JFrame {
         manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
 
         JarOutputStream target = new JarOutputStream(new FileOutputStream(out), manifest);
+
+//        File file = new File(input);
+//        if(file.isDirectory() && !file.exists())
+//            showStatus("creating dir: " + file.mkdir());
+
         add(new File(input), target);
 
         target.close();

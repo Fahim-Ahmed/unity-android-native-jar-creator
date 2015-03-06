@@ -1,0 +1,96 @@
+JFDML JFormDesigner: "5.2.1.0.138" Java: "1.8.0_25" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:16:p, par l {seq l {par t {seq {comp label3:::p:96:p, space :::p, comp tfDest:::p:310:p, space :::p, comp BtnDest:::p:48:p}, par t:::p {seq {comp label2:::p:78:p, space :::x, comp tfSource:::p:310:p, space :::p, comp btnSource:::p:48:p}, seq {comp label1:::p:78:p, space :p:24:p, comp tfPackage:::p:364:p}}}, space ::22:x}, seq {comp button3::::476:x, space :p:12:p}}}, seq l {space :p:20:p, comp lStat::::484:x}}"
+			"$verticalGroup": "par l {seq l {space :p:20:p, par b {comp label1::b:p::p, comp tfPackage::b:p::p}, space :::p, par b {comp btnSource::b:p::p, comp tfSource::b:p::p, comp label2::b:p::p}, space :::p, par b {comp BtnDest::b:p::p, comp tfDest::b:p::p, comp label3::b:p::p}, space ::110:x, comp lStat:::p::p, space :::p, comp button3:::p:90:p, space :::p}}"
+		} ) {
+			name: "this"
+			"$sizePolicy": 1
+			"minimumSize": new java.awt.Dimension( 520, 380 )
+			"resizable": false
+			"title": "Unity Android Plugin Generator"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Package Name"
+				"font": &FontUIResource0 new javax.swing.plaf.FontUIResource( "Segoe UI Semibold", 0, 11 )
+				"toolTipText": "eg. com.company.app"
+				auxiliary() {
+					"font.forceValue": true
+				}
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "tfPackage"
+				"toolTipText": "eg. com.company.app"
+				"font": #FontUIResource0
+				auxiliary() {
+					"font.forceValue": true
+				}
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "tfSource"
+				"toolTipText": "src directory path"
+				"font": #FontUIResource0
+				auxiliary() {
+					"font.forceValue": true
+				}
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Source Path"
+				"font": #FontUIResource0
+				"toolTipText": "src directory path"
+				auxiliary() {
+					"font.forceValue": true
+				}
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "tfDest"
+				"toolTipText": "Unity asset/plugins/android directory path"
+				"font": #FontUIResource0
+				auxiliary() {
+					"font.forceValue": true
+				}
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Destination Path"
+				"font": #FontUIResource0
+				"toolTipText": "Unity asset/plugins/android directory path"
+				auxiliary() {
+					"font.forceValue": true
+				}
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSource"
+				"text": "O "
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSourceActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "BtnDest"
+				"text": "O "
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BtnDestActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button3"
+				"text": "Convert"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lStat"
+				"text": "Zzz..."
+				"font": #FontUIResource0
+				"foreground": new java.awt.Color( 0, 255, 153, 255 )
+				auxiliary() {
+					"font.forceValue": true
+				}
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 5 )
+			"size": new java.awt.Dimension( 520, 380 )
+		} )
+	}
+}
+
